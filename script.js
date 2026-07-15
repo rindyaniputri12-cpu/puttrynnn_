@@ -208,3 +208,74 @@ menu.onclick=()=>{
 nav.classList.toggle("active");
 
 };
+/* ==========================
+   BACKGROUND MUSIC
+========================== */
+
+const bgMusic = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let isPlaying = false;
+
+// Musik mulai setelah loader selesai
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+bgMusic.volume = 0.3;
+
+bgMusic.play().then(()=>{
+
+isPlaying = true;
+musicBtn.classList.add("musicRotate");
+
+}).catch(()=>{
+
+// Browser meminta interaksi pengguna
+
+});
+
+},1700);
+
+});
+
+// Jika autoplay diblokir browser,
+// klik pertama akan memulai musik
+
+document.body.addEventListener("click",()=>{
+
+if(!isPlaying){
+
+bgMusic.volume=0.3;
+
+bgMusic.play();
+
+isPlaying=true;
+
+musicBtn.classList.add("musicRotate");
+
+}
+
+},{once:true});
+
+// Tombol Play/Pause
+
+musicBtn.onclick=()=>{
+
+if(isPlaying){
+
+bgMusic.pause();
+
+musicBtn.classList.remove("musicRotate");
+
+}else{
+
+bgMusic.play();
+
+musicBtn.classList.add("musicRotate");
+
+}
+
+isPlaying=!isPlaying;
+
+};
